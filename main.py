@@ -13,6 +13,8 @@ In that situation, you can use a package manager, such as pip (https://github.co
 import json
 import requests
 
+import os
+
 
 """
 # Specify the API URL and token of the Hugging Face API.
@@ -95,35 +97,23 @@ And the "data" folder is placed together with the main.py script in the same fol
 """
 image_to_count = 1
 photo = '.jpeg'
+counted_object = 'bicycle'
+#Counted object is the object that the AI counts.
 
-for i in range(18):
-  if image_to_count == 11:
+for i in range(71):
+  if image_to_count == 32 and counted_object == 'bicycle':
+    counted_object = 'car'
     image_to_count = 1
-    maps = 2
-  if image_to_count == 7 and maps ==2:
-    photo = '.jpeg'
-  #Counted object is the object that the AI counts.
-  counted_object = "car"
-  #Image to count
+  if image_to_count == 27 and counted_object == 'car':
+    counted_object = 'scooter'
+    image_to_count = 1
+  if image_to_count == 7 and counted_object == 'scooter': # Deze werkt nog niet --> edited is zowel de map-naam als de object to search for. Misschien verdelen over andere mapjes met speciale naam??
+    counted_object = 'edited'
+    image_to_count = 1
   
   my_image = f'data/{counted_object}/{image_to_count}{photo}'
-  output = count_objects(my_image, API_URL, API_TOKEN, counted_object)
-
-
-
-  """
-  # Print the output of the model returned by the API.
-
-  The output looks like below:
-      [{'score': 0.937, 'label': 'Egyptian cat'}, {'score': 0.038, 'label': 'tabby, tabby cat'}, {'score': 0.014, 'label': 'tiger cat'}, {'score': 0.003, 'label': 'lynx, catamount'}, {'score': 0.001, 'label': 'Siamese cat, Siamese'}]
-
-  The output is an array of five dictionaries that represent the top 5 predictions from the model.
-  Array and dictionary are both data structures.
-  An array looks like [0, 1, 2, 3], which represents a list of elements (such as numbers).
-  A dictionary looks like {"key1": "value1", "key2", "value2"}, which represents pairs of keys and values.
-  In this case, the first element in the array {'score': 0.937, 'label': 'Egyptian cat'} is the first prediction.
-  It means that the model thinks there are Egyptian cats in the image, with 0.937 probability (which is very high).
-  """
+  output = count_objects(my_image, API_URL, API_TOKEN,     
+  counted_object)
 
 
   print(f'There are {output} {counted_object}s in picture {counted_object}.{image_to_count}')
@@ -131,4 +121,11 @@ for i in range(18):
 
 
 
-# Wow wat gaaaaaaaaaaaaaaaaaaf
+# Look at
+# cars_dir = "data/car"
+# bikes_dir = "data/bicycle"
+# scooter_dir = "data/scooter"
+# edited = "data/edited"
+
+# for i in os.listdir(cars_dir):
+  
