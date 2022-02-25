@@ -94,11 +94,10 @@ This means that "000000039769.jpeg" is placed in the "data" folder.
 And the "data" folder is placed together with the main.py script in the same folder.
 """
 image_to_count = 1
-maps = 1
-photo = '.jpg'
+photo = '.jpeg'
 
 for i in range(18):
-  if image_to_count == 11 and maps == 1:
+  if image_to_count == 11:
     image_to_count = 1
     maps = 2
   if image_to_count == 7 and maps ==2:
@@ -107,7 +106,7 @@ for i in range(18):
   counted_object = "car"
   #Image to count
   
-  my_image = f'data/bike/{maps}/{image_to_count}{photo}'
+  my_image = f'data/{counted_object}/{image_to_count}{photo}'
   output = count_objects(my_image, API_URL, API_TOKEN, counted_object)
 
 
@@ -127,7 +126,7 @@ for i in range(18):
   """
 
 
-  print(f'There are {output} {counted_object}s in picture {maps}.{image_to_count}')
+  print(f'There are {output} {counted_object}s in picture {counted_object}.{image_to_count}')
   image_to_count = image_to_count + 1
 
 
